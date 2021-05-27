@@ -1,16 +1,10 @@
-//use is auth
-//todo
-//request body contains ticket
-//todo
 import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
-import { Order } from '../../models/order';
+import { Order, OrderStatus } from '../../models/order';
 import { Ticket } from '../../models/ticket';
-import { OrderStatus } from '@sgtickets-kpoxo6op/common';
-import { body } from 'express-validator';
 
-it('throws error when the ticket does not exist', async () => {
+it('returns an error if the ticket does not exist', async () => {
   const ticketId = mongoose.Types.ObjectId();
 
   await request(app)
@@ -28,7 +22,7 @@ it('returns an error if the ticket is already reserved', async () => {
   await ticket.save();
   const order = Order.build({
     ticket,
-    userId: 'gghrhrhrhrhrfrrg',
+    userId: 'laskdflkajsdf',
     status: OrderStatus.Created,
     expiresAt: new Date(),
   });
@@ -54,3 +48,5 @@ it('reserves a ticket', async () => {
     .send({ ticketId: ticket.id })
     .expect(201);
 });
+
+it.todo('emits an order created event');
