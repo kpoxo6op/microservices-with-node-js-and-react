@@ -31,6 +31,7 @@ router.delete(
 
     // publish event this order cancelled
     new OrderCancelledPublisher(natsWrapper.client).publish({
+      version: order.__v!, //https://www.udemy.com/course/microservices-with-node-js-and-react/learn/lecture/19565152#questions/12364886
       id: order.id,
       ticket: {
         id: order.ticket.id,

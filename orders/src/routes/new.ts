@@ -58,6 +58,7 @@ router.post(
 
     // Publish an event saying that an order was created
     new OrderCreatedPublisher(natsWrapper.client).publish({
+      version: order.__v!, //https://www.udemy.com/course/microservices-with-node-js-and-react/learn/lecture/19565152#questions/12364886
       id: order.id,
       status: order.status,
       userId: order.userId,
